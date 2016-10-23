@@ -7,6 +7,6 @@ module.exports = mongoose.model("Event", new Schema({
   location: String,
   organizer: String,
   eventDate: Date,
-  songs: Array,
+  songs: [String],
   created: { type: Date, default: Date.now() }
 }));

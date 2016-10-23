@@ -16,18 +16,28 @@ module.exports = (express, EventService, SongService) => {
 
   events.get("/:eventid/songs", (req, res) => {
     let eventId = req.params.eventid;
+    EventService.getEventSongs(eventId)
+      .then(data => res.json(data))
+      .catch(error => res.status(400).json(error));
   });
 
   events.get("/:eventid/songs/:songid", (req, res) => {
     let eventId = req.params.eventid;
     let songId = req.params.songid;
-
-    res.json({event: eventId, song: songId});
+    EventService.getEventSong(eventId, songId)
+      .then(data => res.json(data))
+      .catch(error => res.status(400).json(error));
   });
 
   events.post("/", (req, res) => {
-    EventService.create()
-      .then(data => res.json(data))
+    let newEvent = {
+      title: req.body.title,
+      location: req.body.location,
+      organizer: req.body.organizer,
+      eventDate: req.body.eventDate
+    };
+    EventService.create(newEvent)
+      .then(data => res.status(201).json(data))
       .catch(error => res.status(400).json(error));
   });
 

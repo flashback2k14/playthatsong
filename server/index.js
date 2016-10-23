@@ -19,17 +19,19 @@ mongoose.connect(config.database);
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// create helpers
+const CryptoHelper = require("./logic/crypto.helper")(config.pwSecret)
 // create services
 if (config.isDebug) {
   var SetupService = require("./logic/setup.service")(User, Event, Song);
 }
-const AuthService = require("./logic/auth.service")(User, config.secret, config.pwSecret);
+const AuthService = require("./logic/auth.service")(User, config.secret, CryptoHelper);
 const UserService = require("./logic/user.service")(User);
 const EventService = require("./logic/event.service")(Event, Song);
 const SongService = require("./logic/song.service")(Song);
 // create routes
 if (config.isDebug) {
-  var setupTestDataRoute = require("./routes/setup")(express, SetupService);
+  var setupTestDataRoute = require("./routes/setup/index")(express, SetupService);
 }
 const baseRoute = require("./routes/index")(express);
 const baseApiV1Route = require("./routes/api/v1/index")(express);

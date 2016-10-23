@@ -223,6 +223,9 @@ module.exports = (User, Event, Song) => {
     });
   }
 
+  /**
+   * 
+   */
   return {
     createDemoData: createDemoData
   }

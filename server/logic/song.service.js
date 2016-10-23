@@ -12,7 +12,7 @@ module.exports = (Song) => {
     return new Promise ((resolve, reject) => {
       Song.find({}, (err, songs) => {
         if (err) {
-          reject({success: false, message: `Error in Songs Route - getSongs: ${err.message}`});
+          reject({success: false, message: `Error in Songs Route - GetSongs: ${err.message}`});
           return;
         }
         resolve({success: true, songs});
@@ -29,7 +29,7 @@ module.exports = (Song) => {
     return new Promise ((resolve, reject) => {
       Song.findOne({_id: id}, (err, song) => {
         if (err) {
-          reject({success: false, message: `Error in Songs Route - getSong: ${err.message}`});
+          reject({success: false, message: `Error in Songs Route - GetSong: ${err.message}`});
           return;
         }
         resolve({success: true, song});
@@ -44,7 +44,7 @@ module.exports = (Song) => {
     return new Promise ((resolve, reject) => {
       Song.findOne(song, (err, foundSong) => {
         if (err) {
-          reject({success: false, message: `Error in Songs Route - AddSong - Find: ${err.message}`});
+          reject({success: false, message: `Error in Songs Route - Create: Find: ${err.message}`});
           return;
         }
 
@@ -60,7 +60,7 @@ module.exports = (Song) => {
 
         newSong.save((err, createdSong) => {
           if (err) {
-            reject({success: false, message: `Error in Songs Route - AddSong - Save: ${err.message}`});
+            reject({success: false, message: `Error in Songs Route - Create: Save: ${err.message}`});
             return;
           }
           resolve({success: true, createdSong});
@@ -76,13 +76,13 @@ module.exports = (Song) => {
     return new Promise ((resolve, reject) => {
       Song.findById(id, function (err, song) {
         if (err) {
-          reject({success: false, message: `Error in Songs Route - Upvote - Find by ID: ${err.message}`});
+          reject({success: false, message: `Error in Songs Route - Upvote: Find by ID: ${err.message}`});
           return;
         }
         song.upvotes = song.upvotes + 1;
         song.save((err, updatedSong) => {
           if (err) {
-            reject({success: false, message: `Error in Songs Route - Upvote - Save: ${err.message}`});
+            reject({success: false, message: `Error in Songs Route - Upvote: Save: ${err.message}`});
             return;
           }
           reject({success: true, updatedSong});
@@ -98,13 +98,13 @@ module.exports = (Song) => {
     return new Promise ((resolve, reject) => {
       Song.findById(id, function (err, song) {
         if (err) {
-          reject({success: false, message: `Error in Songs Route - Downvote - Find by ID: ${err.message}`});
+          reject({success: false, message: `Error in Songs Route - Downvote: Find by ID: ${err.message}`});
           return;
         }
         song.downvotes = song.downvotes + 1;
         song.save((err, updatedSong) => {
           if (err) {
-            reject({success: false, message: `Error in Songs Route - Downvote - Save: ${err.message}`});
+            reject({success: false, message: `Error in Songs Route - Downvote: Save: ${err.message}`});
             return;
           }
           reject({success: true, updatedSong});
@@ -113,6 +113,9 @@ module.exports = (Song) => {
     });
   }
 
+  /**
+   * 
+   */
   return {
     getSongs: getSongs,
     getSong: getSong,

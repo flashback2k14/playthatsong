@@ -1,13 +1,11 @@
 const jwt = require("jsonwebtoken");
-const CryptoHelper = require("./crypto.helper")();
 
-
-module.exports = (User, tokenSecret, pwSecret) => {
+module.exports = (User, tokenSecret, CryptoHelper) => {
   /**
    * 
    */
   function login (userName, userPassword) {
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       User.findOne({ name: userName}, (err, user) => {
         if (err) {
           reject({success: false, message: `Error in Users Route - Login: ${err.message}`});
@@ -34,10 +32,10 @@ module.exports = (User, tokenSecret, pwSecret) => {
   }
 
   function register (userName, userPassword) {
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       User.findOne({name: userName}, (err, user) => {
         if (err) {
-          reject({success: false, message: `Error in Users Route - Register - Find: ${err.message}`});
+          reject({success: false, message: `Error in Users Route - Register: Find: ${err.message}`});
           return;
         }
 
@@ -53,7 +51,7 @@ module.exports = (User, tokenSecret, pwSecret) => {
 
         newUser.save((err, createdUser) => {
           if (err) {
-            reject({success: false, message: `Error in Users Route - Register - Save: ${err.message}`});
+            reject({success: false, message: `Error in Users Route - Register: Save: ${err.message}`});
             return;
           }
           resolve({success: true, createdUser});

@@ -1,3 +1,8 @@
+/**
+ * ToDo:
+ *  - update event
+ *  - delete event
+ */
 module.exports = (Event, Song) => {
   /**
    * 
@@ -13,12 +18,13 @@ module.exports = (Event, Song) => {
       });
     });
   }
+
   /**
    * 
    */
   function getEvent (id) {
     return new Promise((resolve, reject) => {
-      Event.findOne({_id: id}, (err, event) => {
+      Event.findById(id, (err, event) => {
         if (err) {
           reject({success: false, message: `Error in Events Route - GetEvent: ${err.message}`});
           return;
@@ -28,37 +34,99 @@ module.exports = (Event, Song) => {
     });
   }
 
-  function create () {
+  /**
+   * 
+   */
+  function getEventSongs (id) {
     return new Promise((resolve, reject) => {
-      let event1 = new Event({
-        title: "Event #4",
-        location: "Location #4",
-        organizer: "Organizer #4",
-        eventDate: "2016.02.31"
-      });
-    
-      let song1 = new Song({
-        artist: "Haftbefehl",
-        title: "Julius Cesar",
-        upvotes: 34,
-        downvotes: 10
-      });
-
-      event1.songs.push(song1);     
-
-      event1.save((err, ev) => {
+      Event.findById(id, (err, foundEvent) => {
         if (err) {
-          reject({message: err.message});
+          reject({success: false, message: `Error in Events Route - GetEventSongs: Event: ${err.message}`});
           return;
         }
-        resolve({ev});
+
+        let songIds = foundEvent.songs;
+        
+        Song.find({_id: { $in: songIds}}, (err, songs) => {
+          if (err) {
+            reject({success: false, message: `Error in Events Route - GetEventSongs: Songs: ${err.message}`});
+            return;
+          }
+          resolve({success: true, songs});
+        });
+      });
+    });
+  }
+
+  /**
+   * 
+   */
+  function getEventSong (eid, sid) {
+    return new Promise((resolve, reject) => {
+      Event.findById(eid, (err, foundEvent) => {
+        if (err) {
+          reject({success: false, message: `Error in Events Route - GetEventSong: Event: ${err.message}`});
+          return;
+        }
+
+        if (!foundEvent) {
+          reject({success: false, message: "No Event was found!"});
+          return;
+        }
+
+        Song.findById(sid, (err, song) => {
+          if (err) {
+            reject({success: false, message: `Error in Events Route - GetEventSong: Song: ${err.message}`});
+            return;
+          }
+          resolve({success: true, song});
+        });
+      });
+    });
+  }
+
+  /**
+   * 
+   */
+  function create (newEvent) {
+    return new Promise((resolve, reject) => {
+      Event.findOne(newEvent, (err, foundEvent) => {
+        if (err) {
+          reject({success: false, message: `Error in Events Route - Create: Find: ${err.message}`});
+          return;
+        }
+
+        if (foundEvent) {
+          reject({success: false, message: `Event is already added. Please add another one.`});
+          return;
+        }
+
+        const createEvent = new Event({
+          title: newEvent.title,
+          location: newEvent.location,
+          organizer: newEvent.organizer,
+          eventDate: newEvent.eventDate
+        });
+
+        createEvent.save((err, createdEvent) => {
+          if (err) {
+            reject({success: false, message: `Error in Events Route - Create: Save: ${err.message}`});
+            return;
+          }
+          resolve({success: true, createdEvent});
+        });
       });
     });
   }
   
+  /**
+   * 
+   */
   return {
     getEvents: getEvents,
     getEvent: getEvent,
+    getEventSongs: getEventSongs,
+    getEventSong: getEventSong,
     create: create
   }
 }
