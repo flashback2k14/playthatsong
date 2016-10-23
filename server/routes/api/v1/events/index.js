@@ -36,7 +36,18 @@ module.exports = (express, EventService, SongService) => {
       organizer: req.body.organizer,
       eventDate: req.body.eventDate
     };
-    EventService.create(newEvent)
+    EventService.createEvent(newEvent)
+      .then(data => res.status(201).json(data))
+      .catch(error => res.status(400).json(error));
+  });
+
+  events.post("/:eventid/songs", (req, res) => {
+    let eventId = req.params.eventid;
+    let newSong = {
+      artist: req.body.artist,
+      title: req.body.title
+    };
+    EventService.createSong(eventId, newSong)
       .then(data => res.status(201).json(data))
       .catch(error => res.status(400).json(error));
   });

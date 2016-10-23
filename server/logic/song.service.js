@@ -40,38 +40,6 @@ module.exports = (Song) => {
   /**
    * 
    */
-  function create (song) {
-    return new Promise ((resolve, reject) => {
-      Song.findOne(song, (err, foundSong) => {
-        if (err) {
-          reject({success: false, message: `Error in Songs Route - Create: Find: ${err.message}`});
-          return;
-        }
-
-        if (foundSong) {
-          reject({success: false, message: `Song is already added. Please add another one.`});
-          return;
-        }
-
-        const newSong = new Song({
-          artist: song.artist,
-          title: song.title
-        });
-
-        newSong.save((err, createdSong) => {
-          if (err) {
-            reject({success: false, message: `Error in Songs Route - Create: Save: ${err.message}`});
-            return;
-          }
-          resolve({success: true, createdSong});
-        });
-      });
-    });
-  }
-
-  /**
-   * 
-   */
   function upvote (id) {
     return new Promise ((resolve, reject) => {
       Song.findById(id, function (err, song) {
@@ -119,7 +87,6 @@ module.exports = (Song) => {
   return {
     getSongs: getSongs,
     getSong: getSong,
-    create: create,
     upvote: upvote,
     downvote: downvote
   }

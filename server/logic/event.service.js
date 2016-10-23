@@ -88,11 +88,11 @@ module.exports = (Event, Song) => {
   /**
    * 
    */
-  function create (newEvent) {
+  function createEvent (newEvent) {
     return new Promise((resolve, reject) => {
       Event.findOne(newEvent, (err, foundEvent) => {
         if (err) {
-          reject({success: false, message: `Error in Events Route - Create: Find: ${err.message}`});
+          reject({success: false, message: `Error in Events Route - CreateEvent: Find: ${err.message}`});
           return;
         }
 
@@ -110,7 +110,7 @@ module.exports = (Event, Song) => {
 
         createEvent.save((err, createdEvent) => {
           if (err) {
-            reject({success: false, message: `Error in Events Route - Create: Save: ${err.message}`});
+            reject({success: false, message: `Error in Events Route - CreateEvent: Save: ${err.message}`});
             return;
           }
           resolve({success: true, createdEvent});
@@ -122,11 +122,54 @@ module.exports = (Event, Song) => {
   /**
    * 
    */
+  function createSong (eid, newSong) {
+    return new Promise((resolve, reject) => {
+      Event.findById(eid, (err, foundEvent) => {
+        if (err) {
+          reject({success: false, message: `Error in Events Route - CreateSong: Find: ${err.message}`});
+          return;
+        }
+
+        if (!foundEvent) {
+          reject({success: false, message: "No Event was found!"});
+          return;
+        }
+
+        let createSong = new Song({
+          artist: newSong.artist,
+          title: newSong.title,
+          eventId: foundEvent._id
+        });
+
+        createSong.save((err, createdSong) => {
+          if (err) {
+            reject({success: false, message: `Error in Events Route - CreateSong: Save Song: ${err.message}`});
+            return;
+          }
+          
+          foundEvent.songs.push(createdSong._id);
+
+          foundEvent.save((err, savedEvent) => {
+            if (err) {
+              reject({success: false, message: `Error in Events Route - CreateSong: Save Event: ${err.message}`});
+              return;
+            }
+            resolve({success: true, savedEvent, createdSong});
+          });
+        });
+      });
+    });
+  }
+
+  /**
+   * 
+   */
   return {
     getEvents: getEvents,
     getEvent: getEvent,
     getEventSongs: getEventSongs,
     getEventSong: getEventSong,
-    create: create
+    createEvent: createEvent,
+    createSong: createSong
   }
 }
