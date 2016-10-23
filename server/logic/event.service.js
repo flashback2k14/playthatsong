@@ -18,7 +18,7 @@ module.exports = (Event, Song) => {
    */
   function getEvent (id) {
     return new Promise((resolve, reject) => {
-      Event.find({_id: id}, (err, event) => {
+      Event.findOne({_id: id}, (err, event) => {
         if (err) {
           reject({success: false, message: `Error in Events Route - GetEvent: ${err.message}`});
           return;

@@ -22,7 +22,7 @@ module.exports = (Song) => {
 
   /**
    * Return one specific Song from DB
-   * @param id {Number} Song id
+   * @param id {String} Song id
    * @returns song {Promise}
    */
   function getSong (id) {
