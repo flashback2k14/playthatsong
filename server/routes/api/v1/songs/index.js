@@ -17,14 +17,14 @@ module.exports = (express, SongService) => {
   songs.patch("/:id/upvote", (req, res) => {
     let songId = req.params.id;
     SongService.upvote(songId)
-      .then(data => res.json(data))
+      .then(data => res.status(200).json(data))
       .catch(error => res.status(400).json(error));
   });
 
   songs.patch("/:id/downvote", (req, res) => {
     let songId = req.params.id;
     SongService.downvote(songId)
-      .then(data => res.json(data))
+      .then(data => res.status(200).json(data))
       .catch(error => res.status(400).json(error));
   });
 
