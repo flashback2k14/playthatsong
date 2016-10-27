@@ -6,7 +6,7 @@ module.exports = (User) => {
     return new Promise ((resolve, reject) => {
       User.find({}, (err, users) => {
         if (err) {
-          reject({success: false, message: `Error in Users Route - getUsers: ${err.message}`});
+          reject({success: false, message: `Error in Users Route - GetUsers: ${err.message}`});
           return;
         }
         resolve({success: true, users});
@@ -19,9 +19,9 @@ module.exports = (User) => {
    */
   function getUser (id) {
     return new Promise ((resolve, reject) => {
-      User.findOne({_id: id}, (err, user) => {
+      User.findById(id, (err, user) => {
         if (err) {
-          reject({success: false, message: `Error in Users Route - getUser: ${err.message}`});
+          reject({success: false, message: `Error in Users Route - GetUser: ${err.message}`});
           return;
         }
         resolve({success: true, user});

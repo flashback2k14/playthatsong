@@ -1,3 +1,0 @@
-johnDoeSuperCool = U2FsdGVkX19UkPgHwL32N7fTdPbl20QLoI6F6AG1W7tSIsIc1I9VcaA7uoGuHyn3
-hansPeterEvenCooler = U2FsdGVkX19AhgTSLKpkB21AxJUVruVW23OTzjwyHwhyiZ6m91LNUnzd1vHh39+L
-yeahyeahyeah = U2FsdGVkX19Tto4ZZxG7XKUs5c3A90kPEbkvAKWrRd8=
