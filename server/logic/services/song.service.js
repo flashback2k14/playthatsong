@@ -1,8 +1,3 @@
-/**
- * ToDo:
- *  - update song
- *  - delete song
- */
 module.exports = (Song) => {
   /**
    * Return all Songs from DB

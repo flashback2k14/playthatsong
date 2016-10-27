@@ -216,10 +216,10 @@ module.exports = (User, Event, Song) => {
               }
               // finish message
               msgs.push("Demo Data is ready!");
-              resolve({message: msgs}); 
+              resolve({success: true, message: msgs}); 
             });
         })
-        .catch(error => reject(error.message));
+        .catch(error => reject({success: false, message: error.message}));
     });
   }
 

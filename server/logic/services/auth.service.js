@@ -17,7 +17,7 @@ module.exports = (User, tokenSecret, CryptoHelper) => {
           return;
         }
 
-        if (userPassword !== CryptoHelper.decrypt(user.password, pwSecret)) {
+        if (userPassword !== CryptoHelper.decrypt(user.password)) {
           reject({success: false, message: "Authentication failed. Wrong password."});
           return;
         }
@@ -46,7 +46,7 @@ module.exports = (User, tokenSecret, CryptoHelper) => {
 
         const newUser = new User({
           name: userName,
-          password: CryptoHelper.encrypt(userPassword, pwSecret)
+          password: CryptoHelper.encrypt(userPassword)
         });
 
         newUser.save((err, createdUser) => {

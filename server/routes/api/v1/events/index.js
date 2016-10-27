@@ -52,6 +52,21 @@ module.exports = (express, EventService, SongService) => {
       .catch(error => res.status(400).json(error));
   });
 
+  events.put("/:eventid", (req, res) => {
+    let eventId = req.params.eventid;
+    let updatedEvent = {
+      title: req.body.title,
+      location: req.body.location,
+      organizer: req.body.organizer,
+      eventDate: req.body.eventDate,
+      songs: req.body.songs,
+      created: req.body.created
+    };
+    EventService.updateEvent(eventId, updatedEvent)
+      .then(data => res.status(200).json(data))
+      .catch(error => res.status(400).json(error));
+  });
+
   events.put("/:eventid/songs/:songid", (req, res) => {
     let eventId = req.params.eventid;
     let songId = req.params.songid;

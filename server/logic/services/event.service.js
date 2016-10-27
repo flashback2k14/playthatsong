@@ -1,7 +1,3 @@
-/**
- * ToDo:
- *  - update event
- */
 module.exports = (Event, Song) => {
   /**
    * return all avialable events
@@ -182,15 +178,49 @@ module.exports = (Event, Song) => {
           // add new created song id to events song array
           foundEvent.songs.push(createdSong._id);
           // save found event
-          foundEvent.save((err, savedEvent) => {
+          foundEvent.save((err, updatedEvent) => {
             // error handling
             if (err) {
               reject({success: false, message: `Error in Events Route - CreateSong: Save Event: ${err.message}`});
               return;
             }
             // return event and song
-            resolve({success: true, savedEvent, createdSong});
+            resolve({success: true, updatedEvent, createdSong});
           });
+        });
+      });
+    });
+  }
+
+  /**
+   * update specific event
+   * @param eid {String}
+   * @param updEvent {Event}
+   * @returns {Promise}
+   */
+  function updateEvent (eid, updEvent) {
+    return new Promise((resolve, reject) => {
+      // find specific event from id
+      Event.findById(eid, (err, foundEvent) => {
+        // error handling
+        if (err) {
+          reject({success: false, message: `Error in Events Route - UpdateEvent: Find: ${err.message}`});
+          return;
+        }
+        // check if event is available
+        if (!foundEvent) {
+          reject({success: false, message: "No Event was found!"});
+          return;
+        }
+        // find and update event by id
+        Event.findByIdAndUpdate(eid, updEvent, {new: true}, (err, updatedEvent) => {
+          // error handling
+          if (err) {
+            reject({success: false, message: `Error in Events Route - UpdateEvent: Save: ${err.message}`});
+            return;
+          }
+          // return modified song
+          resolve({success: true, updatedEvent});
         });
       });
     });
@@ -217,7 +247,7 @@ module.exports = (Event, Song) => {
           reject({success: false, message: "No Event was found!"});
           return;
         }
-        // find and delete song by id
+        // find and update song by id
         Song.findByIdAndUpdate(sid, updSong, {new: true}, (err, updatedSong) => {
           // error handling
           if (err) {
@@ -287,6 +317,7 @@ module.exports = (Event, Song) => {
     getEventSong: getEventSong,
     createEvent: createEvent,
     createSong: createSong,
+    updateEvent: updateEvent,
     updateSong: updateSong,
     deleteSong: deleteSong
   }
