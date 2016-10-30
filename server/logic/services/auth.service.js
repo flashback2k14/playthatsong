@@ -26,7 +26,7 @@ module.exports = (User, tokenSecret, CryptoHelper) => {
           expiresIn: "1d"
         });
 
-        resolve({success: true, token});
+        resolve({success: true, token, user});
       });
     });
   }

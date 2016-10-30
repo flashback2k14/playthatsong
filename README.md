@@ -68,7 +68,15 @@ Response body:
   ```json
   {
     "success": true,
-    "token": String
+    "token": String,
+    "user": {
+      "_id": String,
+      "name": String,
+      "password": String,
+      "admin": Boolean,
+      "deejay": Boolean,
+      "created": Date
+    }
   }
   ```
 
