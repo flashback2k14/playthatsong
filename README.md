@@ -17,8 +17,7 @@ npm install
 # Run the Server 
 
 ```shell
-npm run start-db-server
-npm start
+npm run start-dev
 ```
 
 # Stop the Server
@@ -68,7 +67,15 @@ Response body:
   ```json
   {
     "success": true,
-    "token": String
+    "token": String,
+    "user": {
+      "_id": String,
+      "name": String,
+      "password": String,
+      "admin": Boolean,
+      "deejay": Boolean,
+      "created": Date
+    }
   }
   ```
 

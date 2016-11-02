@@ -26,7 +26,7 @@ module.exports = (User, tokenSecret, CryptoHelper) => {
           expiresIn: "1d"
         });
 
-        resolve({success: true, token});
+        resolve({success: true, token, user});
       });
     });
   }
@@ -71,7 +71,17 @@ module.exports = (User, tokenSecret, CryptoHelper) => {
     if (token) {
       jwt.verify(token, tokenSecret, (err, decoded) => {
         if (err) {
-          return res.status(400).json({success: false, message: "Failed to authenticate token."});    
+          let msg = "Failed to authenticate token.";
+
+          if (err.name === "TokenExpiredError") {
+            msg = `${msg} Token expired at ${err.expiredAt}`;
+          }
+
+          if (err.name === "JsonWebTokenError") {
+            msg = `${msg} Error message: ${err.message}`;
+          }
+
+          return res.status(400).json({success: false, message: msg});
         } else {
           req.decoded = decoded;
           next();
