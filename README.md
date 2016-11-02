@@ -75,7 +75,8 @@ Response body:
       "admin": Boolean,
       "deejay": Boolean,
       "created": Date
-    }
+    },
+    "expires": Number
   }
   ```
 
