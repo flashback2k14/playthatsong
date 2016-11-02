@@ -17,8 +17,7 @@ npm install
 # Run the Server 
 
 ```shell
-npm run start-db-server
-npm start
+npm run start-dev
 ```
 
 # Stop the Server
