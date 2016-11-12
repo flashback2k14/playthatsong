@@ -48,7 +48,7 @@ module.exports = (User, Event, Song) => {
       userProm.push(user3.save());
 
       Promise.all(userProm)
-        .then(() => resolve({message: "All Users created!"}))
+        .then((data) => resolve({message: "All Users created!", deejayId: data[2]._id}))
         .catch(error => reject(error.message));
     });
   }
@@ -56,9 +56,10 @@ module.exports = (User, Event, Song) => {
   /**
    * create event with 2 song refs
    */
-  function _createEventOne () {
+  function _createEventOne (deejayid) {
     return new Promise((resolve, reject) => {
       let event1 = new Event({
+        deejayId: deejayid,
         title: "Event #1",
         location: "Location #1",
         organizer: "Organizer #1",
@@ -117,9 +118,10 @@ module.exports = (User, Event, Song) => {
   /**
    * create event with 1 song ref
    */
-  function _createEventTwo () {
+  function _createEventTwo (deejayid) {
     return new Promise((resolve, reject) => {
       let event2 = new Event({
+        deejayId: deejayid,
         title: "Event #2",
         location: "Location #2",
         organizer: "Organizer #2",
@@ -167,9 +169,10 @@ module.exports = (User, Event, Song) => {
   /**
    * create event with 0 song refs
    */
-  function _createEventThree () {
+  function _createEventThree (deejayid) {
     return new Promise((resolve, reject) => {
       let event3 = new Event({
+        deejayId: deejayid,
         title: "Event #3",
         location: "Location #3",
         organizer: "Organizer #3",
@@ -194,31 +197,35 @@ module.exports = (User, Event, Song) => {
       // drop data
       _dropCollections()
         .then((message) => {
-          // create promise holder
-          let promHolder = [];
           // create users
-          promHolder.push(_createUsers());
-          // create event #1
-          promHolder.push(_createEventOne());
-          // create event #2
-          promHolder.push(_createEventTwo());
-          // create event #3
-          promHolder.push(_createEventThree());
-          // finish if all promises resolved!
-          Promise.all(promHolder)
-            .then((messages) => { 
-              let msgs = [];
-              // drop message
-              msgs.push(message.message);
-              // event creation messages
-              for (let msg of messages) {
-                msgs.push(msg.message); 
-              }
-              // finish message
-              msgs.push("Demo Data is ready!");
-              resolve({success: true, message: msgs}); 
-            });
-        })
+          _createUsers()
+            .then(data => {
+              // create promise holder
+              let promHolder = [];          
+              // create event #1
+              promHolder.push(_createEventOne(data.deejayId));
+              // create event #2
+              promHolder.push(_createEventTwo(data.deejayId));
+              // create event #3
+              promHolder.push(_createEventThree(data.deejayId));
+              // finish if all promises resolved!
+              Promise.all(promHolder)
+                .then((messages) => { 
+                  let msgs = [];
+                  // drop message
+                  msgs.push(message.message);
+                  // user message
+                  msgs.push(data.message);
+                  // event creation messages
+                  for (let msg of messages) {
+                    msgs.push(msg.message); 
+                  }
+                  // finish message
+                  msgs.push("Demo Data is ready!");
+                  resolve({success: true, message: msgs}); 
+                });
+              })
+            })
         .catch(error => reject({success: false, message: error.message}));
     });
   }

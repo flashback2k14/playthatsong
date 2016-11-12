@@ -190,6 +190,7 @@ Response body:
     "success": true,
     "events": [{
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -221,6 +222,7 @@ Response body:
     "success": true,
     "event": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -317,6 +319,7 @@ Response body:
     "success": true,
     "createdEvent": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -354,6 +357,7 @@ Response body:
     "success": true,
     "updatedEvent": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -405,6 +409,7 @@ Response body:
     "success": true,
     "updatedEvent": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -476,6 +481,7 @@ Response body:
     "success": true,
     "updatedEvent": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
