@@ -124,6 +124,9 @@ Error body:
 
 **GET /api/v1/users**
 
+Optional Query Parameter:
+  - flag: admin | dj | user
+
 Response body:
   ```json
   {

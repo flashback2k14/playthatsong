@@ -1,6 +1,6 @@
 {
   "name": "playthatsong",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "add new songs to the dj's playlist",
   "author": "flashback2k14",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev-server": "nodemon server/index.js",
     "start-db-server": "brew services start mongodb",
-    "start-dev": "npm run start-dev-server && npm run start-db-server",
+    "start-dev": "npm run start-db-server && npm run start-dev-server",
     "stop-db-server": "brew services stop mongodb"
   },
   "dependencies": {
