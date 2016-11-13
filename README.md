@@ -184,6 +184,9 @@ Error body:
 
 **GET /api/v1/events**
 
+Optional Query Parameter:
+  - dj: DJ ID [_id]
+
 Response body:
   ```json
   {
@@ -306,6 +309,7 @@ Error body:
 Request body:
   ```json
   {
+    "deejayId": String,
     "title": String,
     "location": String,
     "organizer": String,
@@ -393,7 +397,7 @@ Path Parameter:
 Request body:
   ```json
   {
-    "_id": String,
+    "deejayId": String,
     "title": String,
     "location": String,
     "organizer": String,

@@ -37,7 +37,7 @@ const baseRoute = require("./routes/index")(express);
 const baseApiV1Route = require("./routes/api/v1/index")(express);
 const authApiV1Route = require("./routes/api/v1/auth/index")(express, AuthService);
 const usersApiV1Route = require("./routes/api/v1/users/index")(express, UserService);
-const eventApiV1Route = require("./routes/api/v1/events/index")(express, EventService, SongService);
+const eventApiV1Route = require("./routes/api/v1/events/index")(express, EventService);
 const songsApiV1Route = require("./routes/api/v1/songs/index")(express, SongService);
 // define routes and add routes
 if (config.isDebug) {
