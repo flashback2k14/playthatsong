@@ -4,47 +4,32 @@ module.exports = (User) => {
    */
   function getUsers (flag) {
     return new Promise ((resolve, reject) => {
+      let query = {};
+      
       switch (flag) {
         case "admin":
-          User.find({admin: true}, (err, users) => {
-            if (err) {
-              reject({success: false, message: `Error in Users Route - GetUsers: ${err.message}`});
-              return;
-            }
-            resolve({success: true, users});
-          });
+          query = { admin: true };
           break;
 
         case "dj": 
-          User.find({deejay: true}, (err, users) => {
-            if (err) {
-              reject({success: false, message: `Error in Users Route - GetUsers: ${err.message}`});
-              return;
-            }
-            resolve({success: true, users});
-          });
+          query = { deejay: true };
           break;
 
         case "user": 
-          User.find({admin: false, deejay: false}, (err, users) => {
-            if (err) {
-              reject({success: false, message: `Error in Users Route - GetUsers: ${err.message}`});
-              return;
-            }
-            resolve({success: true, users});
-          });
+          query = { admin: false, deejay: false };
           break;
 
         default:
-          User.find({}, (err, users) => {
-            if (err) {
-              reject({success: false, message: `Error in Users Route - GetUsers: ${err.message}`});
-              return;
-            }
-            resolve({success: true, users});
-          });
           break;
       }
+
+      User.find(query, (err, users) => {
+        if (err) {
+          reject({success: false, message: `Error in Users Route - GetUsers: ${err.message}`});
+          return;
+        }
+        resolve({success: true, users});
+      });
     });
   }
 
