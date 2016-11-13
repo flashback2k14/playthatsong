@@ -2,7 +2,8 @@ module.exports = (express, UserService) => {
   const users = express.Router();
 
   users.get("/", (req, res) => {
-    UserService.getUsers()
+    let flag = req.query.flag;
+    UserService.getUsers(flag)
       .then(data => res.json(data))
       .catch(error => res.status(400).json(error));
   });

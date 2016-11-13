@@ -1,8 +1,9 @@
-module.exports = (express, EventService, SongService) => {
+module.exports = (express, EventService) => {
   const events = express.Router();
 
   events.get("/", (req, res) => {
-    EventService.getEvents()
+    let deejayId = req.query.dj;
+    EventService.getEvents(deejayId)
       .then(data => res.json(data))
       .catch(error => res.status(400).json(error));
   });
@@ -31,6 +32,7 @@ module.exports = (express, EventService, SongService) => {
 
   events.post("/", (req, res) => {
     let newEvent = {
+      deejayId: req.body.deejayId,
       title: req.body.title,
       location: req.body.location,
       organizer: req.body.organizer,
@@ -55,6 +57,7 @@ module.exports = (express, EventService, SongService) => {
   events.put("/:eventid", (req, res) => {
     let eventId = req.params.eventid;
     let updatedEvent = {
+      deejayId: req.body.deejayId,
       title: req.body.title,
       location: req.body.location,
       organizer: req.body.organizer,

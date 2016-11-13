@@ -125,6 +125,9 @@ Error body:
 
 **GET /api/v1/users**
 
+Optional Query Parameter:
+  - flag: admin | dj | user
+
 Response body:
   ```json
   {
@@ -182,12 +185,16 @@ Error body:
 
 **GET /api/v1/events**
 
+Optional Query Parameter:
+  - dj: DJ ID [_id]
+
 Response body:
   ```json
   {
     "success": true,
     "events": [{
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -219,6 +226,7 @@ Response body:
     "success": true,
     "event": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -302,6 +310,7 @@ Error body:
 Request body:
   ```json
   {
+    "deejayId": String,
     "title": String,
     "location": String,
     "organizer": String,
@@ -315,6 +324,7 @@ Response body:
     "success": true,
     "createdEvent": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -352,6 +362,7 @@ Response body:
     "success": true,
     "updatedEvent": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -387,7 +398,7 @@ Path Parameter:
 Request body:
   ```json
   {
-    "_id": String,
+    "deejayId": String,
     "title": String,
     "location": String,
     "organizer": String,
@@ -403,6 +414,7 @@ Response body:
     "success": true,
     "updatedEvent": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,
@@ -474,6 +486,7 @@ Response body:
     "success": true,
     "updatedEvent": {
       "_id": String,
+      "deejayId": String,
       "title": String,
       "location": String,
       "organizer": String,

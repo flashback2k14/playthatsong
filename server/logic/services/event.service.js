@@ -1,12 +1,19 @@
 module.exports = (Event, Song) => {
   /**
    * return all avialable events
+   * @param deejayId {String}
    * @returns {Promise}
    */
-  function getEvents () {
+  function getEvents (deejayId) {
     return new Promise((resolve, reject) => {
-      // find all events
-      Event.find({}, (err, events) => {
+      // init query
+      let query = {};
+      // add deejayId to query if provided
+      if (deejayId) {
+        query = { deejayId: deejayId };
+      }
+      // find all events from query
+      Event.find(query, (err, events) => {
         // check if some errors occurred
         if (err) {
           reject({success: false, message: `Error in Events Route - GetEvents: ${err.message}`});
@@ -123,6 +130,7 @@ module.exports = (Event, Song) => {
         }
         // create new Event object
         const createEvent = new Event({
+          deejayId: newEvent.deejayId,
           title: newEvent.title,
           location: newEvent.location,
           organizer: newEvent.organizer,
