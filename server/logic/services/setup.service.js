@@ -29,7 +29,7 @@ module.exports = (User, Event, Song) => {
       // hansPeterEvenCooler = U2FsdGVkX19AhgTSLKpkB21AxJUVruVW23OTzjwyHwhyiZ6m91LNUnzd1vHh39+L
       let user2 = new User({
         "name": "Hans Peter",
-        "password": "U2FsdGVkX19AhgTSLKpkB21AxJUVruVW23OTzjwyHwhyiZ6m91LNUnzd1vHh39",
+        "password": "U2FsdGVkX19AhgTSLKpkB21AxJUVruVW23OTzjwyHwhyiZ6m91LNUnzd1vHh39+L",
         "admin": false,
         "deejay": false
       });
