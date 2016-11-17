@@ -8,7 +8,10 @@ module.exports = (express, AuthService) => {
   });
 
   auth.post("/register", (req, res) => {
-    AuthService.register(req.body.name, req.body.password)
+    let username = req.body.name;
+    let password = req.body.password;
+    let flag = req.query.flag;
+    AuthService.register(username, password, flag)
       .then(data => res.json(data))
       .catch(error => res.status(400).json(error));
   });

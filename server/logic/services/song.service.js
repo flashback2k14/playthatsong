@@ -1,4 +1,4 @@
-module.exports = (Song) => {
+module.exports = (Song, SocketHelper) => {
   /**
    * Return all Songs from DB
    * @returns songs {Promise}
@@ -48,7 +48,10 @@ module.exports = (Song) => {
             reject({success: false, message: `Error in Songs Route - Upvote: Save: ${err.message}`});
             return;
           }
-          reject({success: true, updatedSong});
+          // publish changes
+          SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
+          // return modified song
+          resolve({success: true, updatedSong});
         });
       });
     });
@@ -70,7 +73,10 @@ module.exports = (Song) => {
             reject({success: false, message: `Error in Songs Route - Downvote: Save: ${err.message}`});
             return;
           }
-          reject({success: true, updatedSong});
+          // publish changes
+          SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
+          // return modified song
+          resolve({success: true, updatedSong});
         });
       });
     });

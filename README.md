@@ -90,6 +90,9 @@ Error body:
 
 **POST /api/v1/auth/register**
 
+Optional Query Parameter:
+  - flag: admin | dj
+
 Request body:
   ```json
   {

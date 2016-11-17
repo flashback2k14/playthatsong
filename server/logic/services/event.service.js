@@ -1,4 +1,4 @@
-module.exports = (Event, Song) => {
+module.exports = (Event, Song, SocketHelper) => {
   /**
    * return all avialable events
    * @param deejayId {String}
@@ -143,6 +143,8 @@ module.exports = (Event, Song) => {
             reject({success: false, message: `Error in Events Route - CreateEvent: Save: ${err.message}`});
             return;
           }
+          // publish changes
+          SocketHelper.publishChanged(SocketHelper.EVENTNAME.EVENTADDED, createdEvent);
           // return created event
           resolve({success: true, createdEvent});
         });
@@ -192,6 +194,9 @@ module.exports = (Event, Song) => {
               reject({success: false, message: `Error in Events Route - CreateSong: Save Event: ${err.message}`});
               return;
             }
+            // publish changes
+            SocketHelper.publishChanged(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
+            SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGADDED, createdSong);
             // return event and song
             resolve({success: true, updatedEvent, createdSong});
           });
@@ -227,6 +232,8 @@ module.exports = (Event, Song) => {
             reject({success: false, message: `Error in Events Route - UpdateEvent: Save: ${err.message}`});
             return;
           }
+          // publish changes
+          SocketHelper.publishChanged(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
           // return modified song
           resolve({success: true, updatedEvent});
         });
@@ -262,6 +269,8 @@ module.exports = (Event, Song) => {
             reject({success: false, message: `Error in Events Route - UpdateSong: Save: ${err.message}`});
             return;
           }
+          // publish changes
+          SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
           // return modified song
           resolve({success: true, updatedSong});
         });
@@ -307,6 +316,9 @@ module.exports = (Event, Song) => {
               reject({success: false, message: `Error in Events Route - DeleteSong: Save: ${err.message}`});
               return;
             }
+            // publish changes
+            SocketHelper.publishChanged(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
+            SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGDELETED, removedSong);
             // return modified event
             resolve({success: true, updatedEvent});
           });
