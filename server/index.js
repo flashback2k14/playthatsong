@@ -56,7 +56,7 @@ app.use("/api/v1/events", AuthService.checkAuthState, eventApiV1Route);
 app.use("/api/v1/songs", AuthService.checkAuthState, songsApiV1Route);
 // io connection
 io.on("connection", (socket) => {
-  console.log("aew client is connected!");
+  console.log("a new client is connected!");
   socket.on('disconnect', () => {
     console.log("a client is disconnected!");
   });
