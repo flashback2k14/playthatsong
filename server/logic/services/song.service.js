@@ -49,7 +49,7 @@ module.exports = (Song, SocketHelper) => {
             return;
           }
           // publish changes
-          SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
+          SocketHelper.publishChanges(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
           // return modified song
           resolve({success: true, updatedSong});
         });
@@ -74,7 +74,7 @@ module.exports = (Song, SocketHelper) => {
             return;
           }
           // publish changes
-          SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
+          SocketHelper.publishChanges(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
           // return modified song
           resolve({success: true, updatedSong});
         });
