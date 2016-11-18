@@ -144,7 +144,7 @@ module.exports = (Event, Song, SocketHelper) => {
             return;
           }
           // publish changes
-          SocketHelper.publishChanged(SocketHelper.EVENTNAME.EVENTADDED, createdEvent);
+          SocketHelper.publishChanges(SocketHelper.EVENTNAME.EVENTADDED, createdEvent);
           // return created event
           resolve({success: true, createdEvent});
         });
@@ -195,8 +195,8 @@ module.exports = (Event, Song, SocketHelper) => {
               return;
             }
             // publish changes
-            SocketHelper.publishChanged(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
-            SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGADDED, createdSong);
+            SocketHelper.publishChanges(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
+            SocketHelper.publishChanges(SocketHelper.EVENTNAME.SONGADDED, createdSong);
             // return event and song
             resolve({success: true, updatedEvent, createdSong});
           });
@@ -233,7 +233,7 @@ module.exports = (Event, Song, SocketHelper) => {
             return;
           }
           // publish changes
-          SocketHelper.publishChanged(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
+          SocketHelper.publishChanges(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
           // return modified song
           resolve({success: true, updatedEvent});
         });
@@ -270,7 +270,7 @@ module.exports = (Event, Song, SocketHelper) => {
             return;
           }
           // publish changes
-          SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
+          SocketHelper.publishChanges(SocketHelper.EVENTNAME.SONGUPDATED, updatedSong);
           // return modified song
           resolve({success: true, updatedSong});
         });
@@ -317,8 +317,8 @@ module.exports = (Event, Song, SocketHelper) => {
               return;
             }
             // publish changes
-            SocketHelper.publishChanged(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
-            SocketHelper.publishChanged(SocketHelper.EVENTNAME.SONGDELETED, removedSong);
+            SocketHelper.publishChanges(SocketHelper.EVENTNAME.EVENTUPDATED, updatedEvent);
+            SocketHelper.publishChanges(SocketHelper.EVENTNAME.SONGDELETED, removedSong);
             // return modified event
             resolve({success: true, updatedEvent});
           });
