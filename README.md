@@ -671,3 +671,25 @@ Error body:
     "message": "error message"
   }
   ```
+
+## **Realtime support for socket.io**
+
+**available Events**
+
+  User:
+    
+    - "deejay_added"
+    - "deejay_updated"
+    - "deejay_deleted" 
+  
+  Event:
+
+    - "event_added"
+    - "event_updated"
+    - "event_deleted"
+  
+  Song:
+
+    - "song_added"
+    - "song_updated"
+    - "song_deleted"
