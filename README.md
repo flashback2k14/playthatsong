@@ -74,7 +74,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     },
     "expires": Number
   }
@@ -111,7 +114,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     }
   }
   ```
@@ -141,7 +147,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     },
     ...
     ]
@@ -171,7 +180,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     }
   }
   ```
@@ -571,6 +583,13 @@ Error body:
 Path Parameter:
   - songid: Song ID [_id]
 
+Request body:
+  ```json
+  {
+    "userid": String
+  }
+  ```
+
 Response body:
   ```json
   {
@@ -583,6 +602,17 @@ Response body:
       "upvotes": Number,
       "downvotes": Number,
       "created": Date
+    },
+    "updatedUser": {
+      "_id": String,
+      "name": String,
+      "password": String,
+      "admin": Boolean,
+      "deejay": Boolean,
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     }
   }
   ```
@@ -600,6 +630,13 @@ Error body:
 Path Parameter:
   - songid: Song ID [_id]
 
+Request body:
+  ```json
+  {
+    "userid": String
+  }
+  ```
+
 Response body:
   ```json
   {
@@ -612,6 +649,17 @@ Response body:
       "upvotes": Number,
       "downvotes": Number,
       "created": Date
+    },
+    "updatedUser": {
+      "_id": String,
+      "name": String,
+      "password": String,
+      "admin": Boolean,
+      "deejay": Boolean,
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     }
   }
   ```

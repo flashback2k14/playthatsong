@@ -33,7 +33,7 @@ if (config.isDebug) {
 const AuthService = require("./logic/services/auth.service")(User, config.secret, CryptoHelper, SocketHelper);
 const UserService = require("./logic/services/user.service")(User);
 const EventService = require("./logic/services/event.service")(Event, Song, SocketHelper);
-const SongService = require("./logic/services/song.service")(Song, SocketHelper);
+const SongService = require("./logic/services/song.service")(Song, User, SocketHelper);
 // create routes
 if (config.isDebug) {
   var setupTestDataRoute = require("./routes/setup/index")(express, SetupService);
