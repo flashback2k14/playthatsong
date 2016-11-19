@@ -12,6 +12,10 @@ const Song = require("./models/song");
 const Event = require("./models/event");
 // create app
 const app = express();
+// create server
+const server = http.createServer(app);
+// create socket.io
+const io = require("socket.io").listen(server);
 // config mongoose
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
@@ -21,14 +25,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // create helpers
 const CryptoHelper = require("./logic/helpers/crypto.helper")(config.pwSecret)
+const SocketHelper = require("./logic/helpers/socket.helper")(io);
 // create services
 if (config.isDebug) {
   var SetupService = require("./logic/services/setup.service")(User, Event, Song);
 }
-const AuthService = require("./logic/services/auth.service")(User, config.secret, CryptoHelper);
+const AuthService = require("./logic/services/auth.service")(User, config.secret, CryptoHelper, SocketHelper);
 const UserService = require("./logic/services/user.service")(User);
-const EventService = require("./logic/services/event.service")(Event, Song);
-const SongService = require("./logic/services/song.service")(Song);
+const EventService = require("./logic/services/event.service")(Event, Song, SocketHelper);
+const SongService = require("./logic/services/song.service")(Song, User, SocketHelper);
 // create routes
 if (config.isDebug) {
   var setupTestDataRoute = require("./routes/setup/index")(express, SetupService);
@@ -49,7 +54,14 @@ app.use("/api/v1/auth", authApiV1Route);
 app.use("/api/v1/users", AuthService.checkAuthState, usersApiV1Route);
 app.use("/api/v1/events", AuthService.checkAuthState, eventApiV1Route);
 app.use("/api/v1/songs", AuthService.checkAuthState, songsApiV1Route);
+// io connection
+io.on("connection", (socket) => {
+  console.log("a new client is connected!");
+  socket.on('disconnect', () => {
+    console.log("a client is disconnected!");
+  });
+});
 // start the server
-const server = http.createServer(app).listen(config.port, () => {
+server.listen(config.port, () => {
   console.log(`Server is running under PORT: ${config.port}`);
 });

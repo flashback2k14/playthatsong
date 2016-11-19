@@ -74,7 +74,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     },
     "expires": Number
   }
@@ -89,6 +92,9 @@ Error body:
   ```
 
 **POST /api/v1/auth/register**
+
+Optional Query Parameter:
+  - flag: admin | dj
 
 Request body:
   ```json
@@ -108,7 +114,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     }
   }
   ```
@@ -138,7 +147,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     },
     ...
     ]
@@ -168,7 +180,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     }
   }
   ```
@@ -568,6 +583,13 @@ Error body:
 Path Parameter:
   - songid: Song ID [_id]
 
+Request body:
+  ```json
+  {
+    "userid": String
+  }
+  ```
+
 Response body:
   ```json
   {
@@ -580,6 +602,17 @@ Response body:
       "upvotes": Number,
       "downvotes": Number,
       "created": Date
+    },
+    "updatedUser": {
+      "_id": String,
+      "name": String,
+      "password": String,
+      "admin": Boolean,
+      "deejay": Boolean,
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     }
   }
   ```
@@ -597,6 +630,13 @@ Error body:
 Path Parameter:
   - songid: Song ID [_id]
 
+Request body:
+  ```json
+  {
+    "userid": String
+  }
+  ```
+
 Response body:
   ```json
   {
@@ -609,6 +649,17 @@ Response body:
       "upvotes": Number,
       "downvotes": Number,
       "created": Date
+    },
+    "updatedUser": {
+      "_id": String,
+      "name": String,
+      "password": String,
+      "admin": Boolean,
+      "deejay": Boolean,
+      "created": Date,
+      "availableVotes": Number,
+      "firstVoting": Date,
+      "resetVoting": Date
     }
   }
   ```
@@ -620,3 +671,25 @@ Error body:
     "message": "error message"
   }
   ```
+
+## **Realtime support for socket.io**
+
+**available Events**
+
+  User:
+    
+    - "deejay_added"
+    - "deejay_updated"
+    - "deejay_deleted" 
+  
+  Event:
+
+    - "event_added"
+    - "event_updated"
+    - "event_deleted"
+  
+  Song:
+
+    - "song_added"
+    - "song_updated"
+    - "song_deleted"

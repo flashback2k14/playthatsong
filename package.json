@@ -1,6 +1,6 @@
 {
   "name": "playthatsong",
-  "version": "0.4.1",
+  "version": "0.4.7",
   "description": "add new songs to the dj's playlist",
   "author": "flashback2k14",
   "license": "MIT",
@@ -20,7 +20,8 @@
     "cors": "^2.8.1",
     "mongoose": "^4.6.3",
     "jsonwebtoken": "^7.1.9",
-    "crypto-js": "^3.1.7"
+    "crypto-js": "^3.1.7",
+    "socket.io": "^1.5.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

@@ -16,14 +16,16 @@ module.exports = (express, SongService) => {
 
   songs.patch("/:id/upvote", (req, res) => {
     let songId = req.params.id;
-    SongService.upvote(songId)
+    let userId = req.body.userid;
+    SongService.upvote(songId, userId)
       .then(data => res.status(200).json(data))
       .catch(error => res.status(400).json(error));
   });
 
   songs.patch("/:id/downvote", (req, res) => {
     let songId = req.params.id;
-    SongService.downvote(songId)
+    let userId = req.body.userid;
+    SongService.downvote(songId, userId)
       .then(data => res.status(200).json(data))
       .catch(error => res.status(400).json(error));
   });

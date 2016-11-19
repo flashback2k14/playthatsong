@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = (User, tokenSecret, CryptoHelper) => {
+module.exports = (User, tokenSecret, CryptoHelper, SocketHelper) => {
   /**
    * 
    */
@@ -41,7 +41,7 @@ module.exports = (User, tokenSecret, CryptoHelper) => {
     });
   }
 
-  function register (userName, userPassword) {
+  function register (userName, userPassword, flag) {
     return new Promise((resolve, reject) => {
       // try to find the user
       User.findOne({name: userName}, (err, user) => {
@@ -56,16 +56,41 @@ module.exports = (User, tokenSecret, CryptoHelper) => {
           return;
         }
         // create new User object
-        const newUser = new User({
-          name: userName,
-          password: CryptoHelper.encrypt(userPassword)
-        });
+        let newUser;
+        switch (flag) {
+          case "dj": 
+            newUser = new User({
+              name: userName,
+              password: CryptoHelper.encrypt(userPassword),
+              deejay: true
+            });
+            break;
+          
+          case "admin":
+            newUser = new User({
+              name: userName,
+              password: CryptoHelper.encrypt(userPassword),
+              admin: true
+            });
+            break;
+
+          default:
+            newUser = new User({
+              name: userName,
+              password: CryptoHelper.encrypt(userPassword)
+            });
+        }
+
         // save new User object
         newUser.save((err, createdUser) => {
           // error handling
           if (err) {
             reject({success: false, message: `Error in Users Route - Register: Save: ${err.message}`});
             return;
+          }
+          // publish changes
+          if (createdUser.deejay) {
+            SocketHelper.publishChanges(SocketHelper.EVENTNAME.DEEJAYADDED, createdUser);
           }
           // return data
           resolve({success: true, createdUser});
