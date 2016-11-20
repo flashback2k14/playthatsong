@@ -6,8 +6,8 @@ module.exports = mongoose.model("User", new Schema({
   password: String,
   admin: { type: Boolean, default: false} ,
   deejay: { type: Boolean, default: false },
-  created: { type: Date, default: Date.now() },
+  created: { type: Number, default: Date.now() },
   availableVotes: { type: Number, default: 10 },
-  firstVoting: { type: Date, default: null },
-  resetVoting: { type: Date, default: null }
+  firstVoting: { type: Number, default: null },
+  resetVoting: { type: Number, default: null }
 }));

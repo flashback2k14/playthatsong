@@ -8,5 +8,5 @@ module.exports = mongoose.model("Song", new Schema({
   eventId: { type: String, default: "-1" },
   upvotes: { type: Number, default: 0 },
   downvotes: { type: Number, default: 0 },
-  created: { type: Date, default: Date.now() }
+  created: { type: Number, default: Date.now() }
 }));

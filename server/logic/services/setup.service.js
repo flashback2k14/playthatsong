@@ -63,7 +63,7 @@ module.exports = (User, Event, Song) => {
         title: "Event #1",
         location: "Location #1",
         organizer: "Organizer #1",
-        eventDate: "2016.10.31"
+        eventDate: 1479656644
       });
 
       event1.save((err, createdEvent) => {
@@ -125,7 +125,7 @@ module.exports = (User, Event, Song) => {
         title: "Event #2",
         location: "Location #2",
         organizer: "Organizer #2",
-        eventDate: "2016.11.30"
+        eventDate: 1479686644
       });
 
       event2.save((err, createdEvent) => {
@@ -176,7 +176,7 @@ module.exports = (User, Event, Song) => {
         title: "Event #3",
         location: "Location #3",
         organizer: "Organizer #3",
-        eventDate: "2016.12.31"
+        eventDate: 1470936644
       });
 
       event3.save((err, finalEvent) => {

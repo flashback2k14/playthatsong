@@ -74,10 +74,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date,
+      "created": Number,
       "availableVotes": Number,
-      "firstVoting": Date,
-      "resetVoting": Date
+      "firstVoting": Number,
+      "resetVoting": Number
     },
     "expires": Number
   }
@@ -114,10 +114,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date,
+      "created": Number,
       "availableVotes": Number,
-      "firstVoting": Date,
-      "resetVoting": Date
+      "firstVoting": Number,
+      "resetVoting": Number
     }
   }
   ```
@@ -147,10 +147,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date,
+      "created": Number,
       "availableVotes": Number,
-      "firstVoting": Date,
-      "resetVoting": Date
+      "firstVoting": Number,
+      "resetVoting": Number
     },
     ...
     ]
@@ -180,10 +180,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date,
+      "created": Number,
       "availableVotes": Number,
-      "firstVoting": Date,
-      "resetVoting": Date
+      "firstVoting": Number,
+      "resetVoting": Number
     }
   }
   ```
@@ -213,9 +213,9 @@ Response body:
       "title": String,
       "location": String,
       "organizer": String,
-      "eventDate": Date,
+      "eventDate": Number,
       "songs": [ String ],
-      "created": Date
+      "created": Number
     },
     ...
     ]
@@ -245,9 +245,9 @@ Response body:
       "title": String,
       "location": String,
       "organizer": String,
-      "eventDate": Date,
+      "eventDate": Number,
       "songs": [ String ],
-      "created": Date
+      "created": Number
     }
   }
   ```
@@ -276,7 +276,7 @@ Response body:
       "eventId": String,
       "upvotes": Number,
       "downvotes": Number,
-      "created": Date
+      "created": Number
     },
     ...
     ]
@@ -307,7 +307,7 @@ Response body:
       "eventId": String,
       "upvotes": Number,
       "downvotes": Number,
-      "created": Date
+      "created": Number
     }
   }
   ```
@@ -329,7 +329,7 @@ Request body:
     "title": String,
     "location": String,
     "organizer": String,
-    "eventDate": Date
+    "eventDate": Number
   }
   ```
 
@@ -343,9 +343,9 @@ Response body:
       "title": String,
       "location": String,
       "organizer": String,
-      "eventDate": Date,
+      "eventDate": Number,
       "songs": [ String ],
-      "created": Date
+      "created": Number
     }
   }
   ```
@@ -381,9 +381,9 @@ Response body:
       "title": String,
       "location": String,
       "organizer": String,
-      "eventDate": Date,
+      "eventDate": Number,
       "songs": [ String ],
-      "created": Date
+      "created": Number
     },
     "createdSong": {
       "_id": String,
@@ -392,7 +392,7 @@ Response body:
       "eventId": String,
       "upvotes": Number,
       "downvotes": Number,
-      "created": Date
+      "created": Number
     }
   }
   ```
@@ -417,9 +417,9 @@ Request body:
     "title": String,
     "location": String,
     "organizer": String,
-    "eventDate": Date,
+    "eventDate": Number,
     "songs": [ String ],
-    "created": Date
+    "created": Number
   }
   ```
 
@@ -433,9 +433,9 @@ Response body:
       "title": String,
       "location": String,
       "organizer": String,
-      "eventDate": Date,
+      "eventDate": Number,
       "songs": [ String ],
-      "created": Date
+      "created": Number
     }
   }
   ```
@@ -461,7 +461,7 @@ Request body:
     "title": String,
     "upvotes": Number,
     "downvotes": Number,
-    "created": Date
+    "created": Number
   }
   ```
 
@@ -476,7 +476,7 @@ Response body:
       "eventId": String,
       "upvotes": Number,
       "downvotes": Number,
-      "created": Date
+      "created": Number
     }
   }
   ```
@@ -505,9 +505,9 @@ Response body:
       "title": String,
       "location": String,
       "organizer": String,
-      "eventDate": Date,
+      "eventDate": Number,
       "songs": [ String ],
-      "created": Date
+      "created": Number
     }
   }
   ```
@@ -535,7 +535,7 @@ Response body:
       "eventId": String,
       "upvotes": Number,
       "downvotes": Number,
-      "created": Date
+      "created": Number
     },
     ...
     ]
@@ -565,7 +565,7 @@ Response body:
       "eventId": String,
       "upvotes": Number,
       "downvotes": Number,
-      "created": Date
+      "created": Number
     }
   }
   ```
@@ -601,7 +601,7 @@ Response body:
       "eventId": String,
       "upvotes": Number,
       "downvotes": Number,
-      "created": Date
+      "created": Number
     },
     "updatedUser": {
       "_id": String,
@@ -609,10 +609,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date,
+      "created": Number,
       "availableVotes": Number,
-      "firstVoting": Date,
-      "resetVoting": Date
+      "firstVoting": Number,
+      "resetVoting": Number
     }
   }
   ```
@@ -648,7 +648,7 @@ Response body:
       "eventId": String,
       "upvotes": Number,
       "downvotes": Number,
-      "created": Date
+      "created": Number
     },
     "updatedUser": {
       "_id": String,
@@ -656,10 +656,10 @@ Response body:
       "password": String,
       "admin": Boolean,
       "deejay": Boolean,
-      "created": Date,
+      "created": Number,
       "availableVotes": Number,
-      "firstVoting": Date,
-      "resetVoting": Date
+      "firstVoting": Number,
+      "resetVoting": Number
     }
   }
   ```

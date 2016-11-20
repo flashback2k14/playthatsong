@@ -49,22 +49,22 @@ module.exports = (Song, User, SocketHelper) => {
         // check if firstVoting is null
         if (!foundUser.firstVoting) {
           // set firstVoting to Date.now
-          foundUser.firstVoting = Date.now();
+          foundUser.firstVoting = Math.round(Date.now() / 1000);
         } 
         // check if resetVoting is null
         if (!foundUser.resetVoting) {
           // set resetVoting to 1 hour after firstVoting
-          foundUser.resetVoting = new Date(foundUser.firstVoting).setHours(0);
+          foundUser.resetVoting = foundUser.firstVoting + 60 * 3; // * 60;
         }
         // reset all values
-        if (foundUser.resetVoting > Date.now()) {
+        if (foundUser.resetVoting < (Math.round(Date.now() / 1000))) {
           foundUser.availableVotes = 10;
           foundUser.firstVoting = null;
           foundUser.resetVoting = null;
         }
         // check if availableVotes is greater then 0
         if (foundUser.availableVotes <= 0) {
-          reject({success: false, message: `No Votes available! Please wait until ${foundUser.resetVoting}!`});
+          reject({success: false, message: `No Votes available! Please wait until ${new Date(foundUser.resetVoting * 1000)}!`});
           return;
         }
         // update availableVotes
